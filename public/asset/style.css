@@ -1,0 +1,30 @@
+.fade-in {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 0.1s ease-in-out, transform 0.5s linear;
+}
+
+.fade-out-left {
+  opacity: 0;
+  transform: translateX(-54px);
+  transition: opacity 0.1s ease-in-out, transform 0.5s linear;
+}
+
+.fade-out-right {
+  opacity: 0;
+  transform: translateX(54px);
+  transition: opacity 0.1s ease-in-out, transform 0.5s linear;
+}
+
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+    }
+}

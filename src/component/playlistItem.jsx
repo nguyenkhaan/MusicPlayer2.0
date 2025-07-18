@@ -1,10 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-function PlaylistItem({musicName , imageUrl , onClick})
+function PlaylistItem({musicName, imageUrl , onClick , slideAnimatingClass})
 {
     return (
         <div 
-            className = "bg-white/10 backdrop-blur-md py-3 px-4 shadow-2xl border border-white/20 min-h-56 w-54 rounded-3xl cursor-pointer"
+            className = {`bg-white/10 backdrop-blur-md py-3 px-4 shadow-2xl border border-white/20 min-h-56 w-54 rounded-3xl cursor-pointer
+                            ${slideAnimatingClass}
+            `}
             onClick = {onClick}
             >
             <div 
