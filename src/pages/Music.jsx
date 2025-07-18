@@ -73,10 +73,11 @@ function Music()
                         key = {music.id}
                         src = {music.audio} className="core__audio__player visible w-2 h-2" controls>
                     </audio> 
-                    <Menu playLists = {playLists} handleMusicClick={handleMusicClick} /> 
+                    <Menu music = {music} playLists = {playLists} handleMusicClick={handleMusicClick} /> 
                 </div>
             </div>
         </>
     )
 }
 export default Music
+//music chinh la bai hat dang hat. Truyen bai hat hien dang chon vao trong file Menu luon. Moi phan tu cua PlayList Item cung duoc nhan 1 ki tu ID 

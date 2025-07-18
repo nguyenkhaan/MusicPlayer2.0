@@ -12,7 +12,7 @@ function Header() {
     )
 }
 
-function Menu({ playLists, handleMusicClick }) {
+function Menu({ playLists, music , handleMusicClick }) {   //music chinh la bai hat hat dang phat 
     const [startIndex, setStartIndex] = useState(0)
     const [currPlayList, setCurrPlayList] = useState([])
     const [fadeClass, setFadeClass] = useState('fade-in')
@@ -73,6 +73,7 @@ function Menu({ playLists, handleMusicClick }) {
                 {currPlayList.map((item, index) => (
                     <PlaylistItem
                         key={index}
+                        isPlaying = {item.id === music.id}
                         musicName={item.musicName}
                         imageUrl={item.imageUrl}
                         onClick={() => handleMusicClick(item)}
