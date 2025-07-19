@@ -14,6 +14,7 @@ function MusicButton({time , change})  //change chinh la bien bieu dien cho su t
         setRoundedDisc(prev => {
             if (prev) {
                 prev.style.transition = 'none'
+                prev.style.transition = 'border-radius 0.4s ease-in-out'; 
                 prev.style.transform = 'rotate(0deg)' 
             } 
             return document.querySelector('.rounded-disc div')
