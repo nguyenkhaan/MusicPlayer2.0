@@ -5,6 +5,7 @@ function Running({ time, running, repeat , setRepeat , setRunning , roundedDisc 
     const [process, setProcess] = useState(0); 
     const [transition, setTransition] = useState(true) 
     const [rotate , setRotate] = useState(0); 
+    let currentTimeLine = useRef(null) //currentTime Line dung de tham chieu toi vi tri hien tai cua con chay nhac 
     let translateX = (lineRef.current)? process * (lineRef.current.getBoundingClientRect().width) / time : 0; 
     let rotateDeg = (lineRef.current)? ((360 / (time)) * process) : 0;   //1 vong di roi sau do hay lap di lap lai 1 vong nay 
     useEffect(() => {
@@ -63,7 +64,7 @@ function Running({ time, running, repeat , setRepeat , setRunning , roundedDisc 
             className="time__line h-1 flex items-center w-full bg-white rounded-2xl mt-10 relative"
         >
             <div
-                className={`rounded-full w-4 h-4 bg-white absolute                 
+                className={`rounded-full w-4 h-4 bg-white absolute time__line__in                
                 ${transition? 'transition-transform duration-1000 ease-linear' : ''}`}
                 style={{
                     transform: `translateX(${translateX}px)`,
