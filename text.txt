@@ -1,0 +1,34 @@
+//Truy cập nhanh boundingClinetRect() 
+    const timelineRect = timeline.current.getBoundingClientRect();
+    const pointRect = point.current.getBoundingClientRect();
+    //Vị trí bắt đầu của con trỏ chuột khi nhấn xuống 
+    const startX = e.clientX;
+    digFlag = true;
+    // Tính vị trí hiện tại của point so với timeline (chính xác từ mép trái timeline)
+    const pointOffsetX = pointRect.left - timelineRect.left;
+    // Vị trí hiện tại của point so vớ timeline 
+    function onMouseMove(e) {
+        //Khoảng dịch chuyển (kéo thả) là vị trí con chuột hiện tại trừ cho vị trí con chuột ở thời điểm xuất phát 
+        const deltaX = e.clientX - startX;
+        let nextOffsetX = pointOffsetX + deltaX;  //Tính toán vị trí tiếp theo (dựa trên thằng timline)
+        if (Math.abs(deltaX) >= 2) digFlag = false
+        const maxOffset = timelineRect.width - pointRect.width;  //Maximum của việc kéo thả 
+
+        // Giới hạn trái/phải
+        if (nextOffsetX < 0) nextOffsetX = 0;  //Luc nay phao si sanh voi 0 vi nextOffsetX la vi tri tuong doi 
+        if (nextOffsetX > maxOffset) nextOffsetX = maxOffset;
+
+        // Di chuyển point bằng transform
+        // point.current.style.transition-none
+        setTransition(false)
+        point.current.style.transform = `translateX(${nextOffsetX}px)`;
+        //Cap nhat lai bai hat 
+        let clickX = (point.current.getBoundingClientRect().left - timelineRect.left);
+        const audio = document.querySelector('.core__audio__player')
+        let newTime = (clickX / timelineRect.width) * audio.duration
+        audio.currentTime = newTime
+        setProcess(newTime)
+        setSeek(true);
+        setTransition(true)  //Cap nhat lai transition 
+        // point.current.style.transition = 'transition-transform duration-1000 ease-linear'
+    }

@@ -1,14 +1,16 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { handleClickSeek } from '../services/seekMusic';
+import { handleClickSeek , handleMouseDownSeek } from '../services/seekMusic';
 let intervalID = undefined; 
 function Running({ time, running, repeat , setRepeat , setRunning , roundedDisc }) {
     const lineRef = useRef(null); 
     const [process, setProcess] = useState(0); 
     const [transition, setTransition] = useState(true) 
     const [rotate , setRotate] = useState(0); 
+    const [seek , setSeek] = useState(false); 
     let currentTimeLine = useRef(null) //currentTime Line dung de tham chieu toi vi tri hien tai cua con chay nhac 
     let translateX = (lineRef.current)? process * (lineRef.current.getBoundingClientRect().width) / time : 0; 
     let rotateDeg = (lineRef.current)? ((360 / (time)) * process) : 0;   //1 vong di roi sau do hay lap di lap lai 1 vong nay 
+    //Update lai xem co tua hay khong -> chi can cho no khong tua la duoc 
     useEffect(() => {
         clearTimeout(intervalID); 
         if (running && process == time) {
@@ -52,8 +54,20 @@ function Running({ time, running, repeat , setRepeat , setRunning , roundedDisc 
     if (running) 
     {
         // roundedDisc.style.transform = 'rotate(0)deg'
+        // if (seek == false)   //Doi thanh false thi cai dia se chay theo 
+        // {
+        //     roundedDisc.style.transition = ''
+        //     roundedDisc.style.transform = ` rotate(${rotateDeg}deg)`;
+        //     setSeek(false) 
+        // }
+        // else {
+        //     roundedDisc.style.transition = 'transform 1s linear'
+        //     roundedDisc.style.transform = ` rotate(${rotateDeg}deg)`;
+        // }
+        
         roundedDisc.style.transition = 'transform 1s linear'
         roundedDisc.style.transform = ` rotate(${rotateDeg}deg)`;
+                
     }
   }
 }, [rotateDeg]);
@@ -63,14 +77,17 @@ function Running({ time, running, repeat , setRepeat , setRunning , roundedDisc 
         <div
             ref = {lineRef}
             className="time__line h-1 flex items-center w-full bg-white rounded-2xl mt-10 relative"
-            onClick = {(e) => handleClickSeek(e , lineRef , currentTimeLine , setProcess)}
+            onClick = {(e) => handleClickSeek(e , lineRef , currentTimeLine , setProcess , setSeek)}
+        
         >
             <div ref = {currentTimeLine}
-                className={`rounded-full w-4 h-4 bg-white absolute time__line__in                
+                className={`rounded-full w-4 h-4 bg-white fixed time__line__in                
                 ${transition? 'transition-transform duration-1000 ease-linear' : ''}`}
                 style={{
                     transform: `translateX(${translateX}px)`,
+                
                 }}
+                onMouseDown={(e) => handleMouseDownSeek(e , lineRef , currentTimeLine , setProcess , setSeek ,setTransition)}
             />
         </div>
     );
