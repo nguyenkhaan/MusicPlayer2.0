@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
+import { handleClickSeek } from '../services/seekMusic';
 let intervalID = undefined; 
 function Running({ time, running, repeat , setRepeat , setRunning , roundedDisc }) {
     const lineRef = useRef(null); 
@@ -57,13 +58,14 @@ function Running({ time, running, repeat , setRepeat , setRunning , roundedDisc 
   }
 }, [rotateDeg]);
 
-    console.log('>>> Check rounded-disc' , roundedDisc) 
+    // console.log('>>> Check rounded-disc' , roundedDisc) 
     return (
         <div
             ref = {lineRef}
             className="time__line h-1 flex items-center w-full bg-white rounded-2xl mt-10 relative"
+            onClick = {(e) => handleClickSeek(e , lineRef , currentTimeLine , setProcess)}
         >
-            <div
+            <div ref = {currentTimeLine}
                 className={`rounded-full w-4 h-4 bg-white absolute time__line__in                
                 ${transition? 'transition-transform duration-1000 ease-linear' : ''}`}
                 style={{
