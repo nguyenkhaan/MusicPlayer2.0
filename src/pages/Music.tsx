@@ -67,6 +67,13 @@ const playLists = [
         musicName: 'Giấc mơ thần tiên', 
         imageUrl: 'https://cdn2.tuoitre.vn/zoom/700_525/471584752817336320/2025/3/19/doraemon-3-17423871378601670583097-20-0-598-1104-crop-174238741186164470166.jpg', 
         audio: '/audio/audio_test_9.mp3'
+    }, 
+    {
+        id: 10, 
+        duration: 185, 
+        musicName: 'We Are - One Piece', 
+        imageUrl: 'https://i.pinimg.com/736x/59/0b/27/590b2779cc444798093df628cbab5a0e.jpg', 
+        audio: '/audio/audio_test_10.mp3'
     }
     
 ]
